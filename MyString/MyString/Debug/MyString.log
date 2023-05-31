@@ -1,0 +1,3 @@
+﻿  main.cpp
+E:\Code_Project\BitWork\MySTL\MyString\MyString\MyString\MyString.h(126,21): warning C4018: “<”: 有符号/无符号不匹配
+  MyString.vcxproj -> E:\Code_Project\BitWork\MySTL\MyString\MyString\Debug\MyString.exe
