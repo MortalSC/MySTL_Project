@@ -1,15 +1,23 @@
 ﻿  main.cpp
-C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(245,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(272,21): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(50,25): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(44): message : 在编译 类 模板 成员函数“STL::vector<std::string>::vector(int,const T &)”时
           with
           [
               T=std::string
           ]
-C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(353): message : 查看对正在编译的函数 模板 实例化“STL::vector<std::string>::vector(int,const T &)”的引用
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(380): message : 查看对正在编译的函数 模板 实例化“STL::vector<std::string>::vector(int,const T &)”的引用
           with
           [
               T=std::string
           ]
-C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(353): message : 查看对正在编译的 类 模板 实例化“STL::vector<std::string>”的引用
-  vector.vcxproj -> C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\Debug\vector.exe
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(380): message : 查看对正在编译的 类 模板 实例化“STL::vector<std::string>”的引用
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(96,1): error C2662: “int *STL::vector<int>::begin(void)”: 不能将“this”指针从“const STL::vector<int>”转换为“STL::vector<int> &”
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(96,19): message : 转换丢失限定符
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(253,12): message : 参见“STL::vector<int>::begin”的声明
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(95): message : 在编译 类 模板 成员函数“STL::vector<int>::vector(const STL::vector<int> &)”时
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(377): message : 查看对正在编译的函数 模板 实例化“STL::vector<int>::vector(const STL::vector<int> &)”的引用
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(261): message : 查看对正在编译的 类 模板 实例化“STL::vector<int>”的引用
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(96,1): error C2662: “int *STL::vector<int>::end(void)”: 不能将“this”指针从“const STL::vector<int>”转换为“STL::vector<int> &”
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(96,30): message : 转换丢失限定符
+C:\Users\86180\Desktop\BitStudying\BitCPPLearning\STL\stl_vector\vector\vector\STL_VECTOR.h(254,12): message : 参见“STL::vector<int>::end”的声明

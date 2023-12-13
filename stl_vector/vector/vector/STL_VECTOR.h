@@ -65,21 +65,39 @@ namespace STL {
 		}
 
 		/*
+		*	赋值构造
+		*/
+		vector<T>& operator = (vector<T> v) {
+			swap(v);
+			return *this;
+		}
+
+
+		/*
 		*	拷贝构造
 		*/
+		// 写法一
+		//vector(const vector<T>& v) {
+		//	reserve(v.capacity());
+		//	//for (size_t i = 0; i < n; i++) {
+		//	//	push_back(v[i]);
+		//	//}
+		//	//memcpy(_start, v._start, sizeof(T) * v.size());	// 只能解决内置类型！不安全！
+		//	//_start = new T[v.capcity()];
+		//	for (size_t i = 0; i < v.size(); i++) {
+		//		_start[i] = v._start[i];
+		//	}
+		//	_finish = _start + v.size();
+		//	_end_of_storage = _start + v.capacity();
+		//}
+
+		// 写法二：复用已有代码
 		vector(const vector<T>& v) {
-			reserve(v.capacity());
-			//for (size_t i = 0; i < n; i++) {
-			//	push_back(v[i]);
-			//}
-			//memcpy(_start, v._start, sizeof(T) * v.size());	// 只能解决内置类型！不安全！
-			//_start = new T[v.capcity()];
-			for (size_t i = 0; i < v.size(); i++) {
-				_start[i] = v._start[i];
-			}
-			_finish = _start + v.size();
-			_end_of_storage = _start + v.capacity();
+			vector<T> temp(v.cbegin(), v.cend());
+			swap(temp);
 		}
+
+
 
 		/*
 		*	析构函数
@@ -156,6 +174,15 @@ namespace STL {
 		void pop_back() {
 			assert(!empty());
 			--_finish;
+		}
+
+		/*
+		*	交换
+		*/
+		void swap(vector<T>& v) {
+			std::swap(_start, v._start);
+			std::swap(_finish, v._finish);
+			std::swap(_end_of_storage, v._end_of_storage);
 		}
 
 		/*
