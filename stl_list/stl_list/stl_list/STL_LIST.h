@@ -1,6 +1,7 @@
 #pragma warning ( disable : 4996 )
 #pragma once
 #include <cassert>
+#include "reverse_iterator.h"
 
 namespace STL {
 	template <class T>
@@ -26,6 +27,7 @@ namespace STL {
 	template <class T, class Ref, class Ptr>	// 扩展实现 const 迭代器，使用第二个模板参数解决返回值问题
 	struct __list_iterator {
 		typedef list_node<T> node;	// 取别名
+		typedef __list_iterator<T, Ref, Ptr> self;
 		node* _node;				// 结点指针
 		// 构造函数
 		__list_iterator(node* ptr_node):_node(ptr_node){}
@@ -33,46 +35,60 @@ namespace STL {
 		//T& operator * () { return _node->_data; }
 		Ref operator * () { return _node->_data; }
 		
+
+		// 支持 -> 访问
+		//T* operator -> () { return &(_node->_data); }
+
+		// 优化解决 const 迭代器限制【引入第三个模板参数：Ptr】
+		Ptr operator -> () { return &(_node->_data); }
 		// 前置++
-		__list_iterator<T, Ref, Ptr>& operator++() {
+		/*__list_iterator<T, Ref, Ptr>& operator++() */
+		self& operator++()
+		{
 			_node = _node->_next;
 			return *this;
 		}
 		// 后置++
-		__list_iterator<T, Ref, Ptr> operator ++ (int) {
-			__list_iterator<T, Ref, Ptr>& temp(*this);
+		/*__list_iterator<T, Ref, Ptr> operator ++ (int) */
+		self operator ++ (int)
+		{
+			//__list_iterator<T, Ref, Ptr>& temp(*this);
+			self& temp(*this);
 			_node = _node->_next;
 			return temp;
 		}
 		// 前置--
-		__list_iterator<T, Ref, Ptr>& operator--() {
-			_node = _node->_next;
+		//__list_iterator<T, Ref, Ptr>& operator--() 
+		self& operator--() {
+			_node = _node->_prev;
 			return *this;
 		}
 		// 后置--
-		__list_iterator<T, Ref, Ptr> operator -- (int) {
-			__list_iterator<T, Ref, Ptr>& temp(*this);
+		//__list_iterator<T, Ref, Ptr> operator -- (int) 
+		self operator -- (int)
+		{
+			//__list_iterator<T, Ref, Ptr>& temp(*this);
+			self& temp(*this);
 			_node = _node->prev;
 			return temp;
 		}
 
 		// 不等
-		bool operator != (const __list_iterator<T, Ref, Ptr>& pnode) {
+		//bool operator != (const __list_iterator<T, Ref, Ptr>& pnode) 
+		bool operator != (const self& pnode)
+		{
 			return _node != pnode._node;
 		}
 		// 相等
-		bool operator == (const __list_iterator<T, Ref, Ptr>& pnode) {
+		/*bool operator == (const __list_iterator<T, Ref, Ptr>& pnode) */
+		bool operator == (const self& pnode)
+		{
 			return _node == pnode._node;
 		}
 
-		// 支持 -> 访问
-		//T* operator -> () { return &(_node->_data); }
-		
-		// 优化解决 const 迭代器限制【引入第三个模板参数：Ptr】
-		Ptr operator -> () { return &(_node->_data); }
+
 
 	};
-
 
 
 
@@ -84,10 +100,20 @@ namespace STL {
 		//typedef __list_iterator<T> iterator;		// 迭代器【注意不要使用引用！！！】
 		typedef __list_iterator<T, T&, T*> iterator;
 		typedef __list_iterator<T, const T&, const T*> const_iterator;
+		
+		typedef ReverseIterator<iterator, T&, T*> reverse_iterator;
+		typedef ReverseIterator<iterator, const T&, const T*> const_reverse_iterator;
+
+
 		iterator begin() { return iterator(_head->_next); }
 		iterator end() { return iterator(_head); }
 		const_iterator cbegin() const { return const_iterator(_head->_next); }
 		const_iterator cend() const { return const_iterator(_head); }
+		reverse_iterator rbegin() { return reverse_iterator(end()); }
+		reverse_iterator rend() { return reverse_iterator(begin()); }
+		const_reverse_iterator crbegin()const { return reverse_iterator(cend()); }
+		const_reverse_iterator crend() const{ return reverse_iterator(cbegin()); }
+
 	private:
 		list_node<T>* _head;
 	public:
@@ -388,6 +414,24 @@ namespace STL {
 		// 赋值运算符重载
 		list<int> ls4 = ls1;
 		for (auto e : ls3) std::cout << e << " ";
+		std::cout << std::endl;
+	}
+
+	// 测试反向迭代器的设计
+	void test9() {
+		list<int> ls1;
+		for (int i = 1; i < 7; i++) {
+			ls1.push_back(i);
+		}
+		std::cout << "顺序插入结果：";
+		for (auto e : ls1) std::cout << e << " ";
+		std::cout << std::endl;
+
+		list<int>::reverse_iterator iter = ls1.rbegin();
+		while (iter != ls1.rend()) {
+			std::cout << *iter << " ";
+			++iter;
+		}
 		std::cout << std::endl;
 	}
 }
